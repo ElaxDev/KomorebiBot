@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
   if (args.length === 1){
     var user = message.guild.member(message.author);
     var role_tag = args.join(" ");
@@ -20,5 +20,6 @@ module.exports.run = async (bot, message, args) => {
   }
 }
 module.exports.help = {
-  name: "give_rol"
+  name: "give_rol",
+  usage: ""
 }

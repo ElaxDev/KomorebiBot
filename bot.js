@@ -4,6 +4,7 @@ const bot = new Discord.Client({disableEveryone: true});
 const prefix = bot_config.prefix;
 const fs = require('fs');
 var commands = [];
+var help = [];
 let coins = require('./coins.json');
 let xp = require('./xp.json')
 
@@ -23,13 +24,14 @@ fs.readdir("./commands/", (error, files) => {
       let props = require(`./commands/${file}`);
       console.log(`${i + 1}: ${file} cargado!`);
       commands.push([props.help.name, props]);
+      help.push([props.help.name, props.help.usage])
   });
 });
 
-function run_command(bot, message, command, args){
+function run_command(bot, message, command, args, help){
   if(!command.startsWith(prefix)) return;
   for(i = 0; i < commands.length; i++){
-    if(prefix+commands[i][0]===command){commands[i][1].run(bot, message, args); break;}
+    if(prefix+commands[i][0]===command){commands[i][1].run(bot, message, args, help); break;}
 }}
 
 bot.on('ready', async() => {console.log(`bot is ready! ${bot.user.username}`)})
@@ -88,7 +90,7 @@ fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
   let command = messageArray[0].toLowerCase();
   let args = messageArray.slice(1);
 
-  run_command(bot, message, command, args);
+  run_command(bot, message, command, args, help);
 });
 
 bot.login(bot_config.token);

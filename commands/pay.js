@@ -2,7 +2,7 @@ const Discord = module.require('discord.js');
 const fs = module.require("fs");
 let coins = require("../coins.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
 
   if(!coins[message.author.id]) {
     return message.reply("¡No tienes monedas para pagar!");
@@ -38,5 +38,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: "pay"
+  name: "pay",
+  usage: ""
 }

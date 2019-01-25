@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
 
   let msg = await message.channel.send("Generando avatar...");
   if (args[0]) {
@@ -28,5 +28,6 @@ module.exports.run = async (bot, message, args) => {
     msg.delete();
 }
 module.exports.help = {
-  name: "avatar"
+  name: "avatar",
+  usage: ""
 }

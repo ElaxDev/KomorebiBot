@@ -4,7 +4,7 @@ const ytdl = module.require('ytdl-core');
 //npm install yt-search
 const search = module.require('yt-search');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
   // const voiceChannel = message.member.voiceChannel;
   // if(!voiceChannel) return message.reply('¡Debes estar en un canal de voz antes de usar este comando!');
   // if((args[0]).startsWith("https://www.youtube.com/watch?v=")) {
@@ -42,5 +42,6 @@ module.exports.run = async (bot, message, args) => {
   // }
 }
 module.exports.help = {
-  name: "play"
+  name: "play",
+  usage: ""
 }

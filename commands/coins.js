@@ -1,7 +1,7 @@
 const Discord = module.require('discord.js');
 let coins = require('../coins.json');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
   if (args[0]) {
     const user = message.mentions.members.first().user;
     if (!user) {
@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
     let userCoins = coins[user.id].coins;
 
     let coinEmbed = new Discord.RichEmbed()
-    .setAuthor(`${user.username} 💵`)
+    .setAuthor(`${user.username} 💵`, message.author.displayAvatarURL)
     .setColor("#ffff00")
     .addField("Balance:", `${user.username} tiene ${userCoins} monedas!`);
 
@@ -41,5 +41,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: "coins"
+  name: "coins",
+  usage: "if.coins [Usuario del que quieres ver las monedas]"
 }

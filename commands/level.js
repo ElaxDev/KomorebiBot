@@ -1,7 +1,7 @@
 const Discord = module.require("discord.js");
 let xp = require("../xp.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
 
 
   if(!xp[message.author.id]) {
@@ -25,5 +25,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: "level"
+  name: "level",
+  usage: ""
 }

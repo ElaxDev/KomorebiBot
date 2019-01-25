@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, help) => {
   let embed = new Discord.RichEmbed()
      .setAuthor(message.author.username)
      .setDescription("¡Esta es la informacion del usuario!")
@@ -12,5 +12,6 @@ module.exports.run = async (bot, message, args) => {
    mesage.channel.send({embed: embed});
 }
 module.exports.help = {
-  name: "userinfo"
+  name: "userinfo",
+  usage: ""
 }
