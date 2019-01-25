@@ -1,0 +1,15 @@
+{
+  "name": "bot",
+  "version": "0.0.1",
+  "description": "IFG ChatBot",
+  "main": "bot.js",
+  "author": "LordFitoi&ElaxKun",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "webshot": "^0.18.0",
+    "yt-search": "^0.4.1",
+    "ytdl": "^0.11.1",
+    "ytdl-core": "^0.29.1"
+  }
+}
