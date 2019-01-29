@@ -1,18 +1,18 @@
 const Discord = module.require('discord.js');
-let coins = require('../coins.json');
+let users_data = require('../resources/users_data.json');
 
 module.exports.run = async (bot, message, args, help) => {
   if (args[0]) {
     const user = message.mentions.members.first().user;
-    if (!user) {
-      return message.reply("Por favor, use una mención válida si quiere ver el balance de alguien más.");
-    }
-    if(!coins[user.id]) {
-      coins[user.id] = {
+    if (!user) return message.reply("Por favor, use una mención válida si quiere ver el balance de alguien más.");
+
+
+    if(!users_data[user.id].Coins  || users_data[user.id].Coins.isNaN === true) {
+      users_data[user.id] = {
         coins: 0
       };
     }
-    let userCoins = coins[user.id].coins;
+    let userCoins = users_data[user.id].Coins;
 
     let coinEmbed = new Discord.RichEmbed()
     .setAuthor(`${user.username} 💵`, message.author.displayAvatarURL)
@@ -22,14 +22,7 @@ module.exports.run = async (bot, message, args, help) => {
     return message.channel.send(coinEmbed)
     // .then(msg => {msg.delete(5000)});
   }
-
-  if(!coins[message.author.id]) {
-    coins[message.author.id] = {
-      coins: 0
-    };
-  }
-
-  let userCoins = coins[message.author.id].coins;
+  let userCoins = users_data[message.author.id].Coins;
 
   let coinEmbed = new Discord.RichEmbed()
   .setAuthor(`${message.author.username} 💵`)

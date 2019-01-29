@@ -1,6 +1,6 @@
 const fs = require('fs')
 var users_data = require('../resources/users_data.json');
-module.exports.add_data = async (user_id, data) => {
+module.exports.add_user = async (user_id) => {
   users_data[user_id] = {
     "Level" : data[0], "Xp": data[1],
     "Coins" : data[2]
