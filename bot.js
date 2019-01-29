@@ -6,8 +6,9 @@ const fs = require('fs');
 var commands = [];
 var help = [];
 let coins = require('./coins.json');
+let users_data = require('./resources/users_data.json')
 let xp = require('./xp.json')
-
+const data_manager = require('./scripts/data_manager.js')
 const webshot = require('./scripts/webshot.js')
 webshot.get_image("prueba.html")
 
@@ -49,32 +50,26 @@ bot.on("message", async message => {
 let coinAmount = Math.floor(Math.random() * 15) + 1;
 let baseAmount = Math.floor(Math.random() * 15) + 1;
 
-if(coinAmount == baseAmount) {
-  coins[message.author.id] = {
-    coins: coins[message.author.id].coins + coinAmount
-  };
-  fs.writeFile("./coins.json", JSON.stringify(coins), (err) => {
-    if(err) console.log(err)
-  });
-}
+// if(coinAmount == baseAmount) {
+  // user_coins = users_data[message.author.id].Coins + coinAmount
+
+// }
 
 let xpAdd = Math.floor(Math.random() * 7) + 8;
 
-if(!xp[message.author.id]) {
-  xp[message.author.id] = {
-    xp:0,
-    level: 1
-  };
+if(!users_data[message.author.id]) {
+  data_manager.add_data(message.author.id,[1,0, baseAmount])
+
 }
 
-let currentxp = xp[message.author.id].xp;
-let currentlevel = xp[message.author.id].level;
-let nextLevel = xp[message.author.id].level * 300;
-xp[message.author.id].xp = currentxp + xpAdd;
+let currentxp = users_data[message.author.id].Xp;
+let currentlevel = users_data[message.author.id].Level;
+let nextLevel = users_data[message.author.id].Level * 300;
+users_data[message.author.id].Xp = currentxp + xpAdd;
 
 
-if(nextLevel <= xp[message.author.id].xp) {
-  xp[message.author.id].level = currentlevel + 1;
+if(nextLevel <= users_data[message.author.id].Xp) {
+  users_data[message.author.id].Level = currentlevel + 1;
   let levelup = new Discord.RichEmbed()
   .setTitle("¡Acabas de subir de nivel!")
   .setColor("#ff00ff")
@@ -82,14 +77,11 @@ if(nextLevel <= xp[message.author.id].xp) {
   return message.channel.send(levelup);
 }
 
-fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
-  if(err) console.log(err);
-});
 
   let messageArray = message.content.split(" ");
   let command = messageArray[0].toLowerCase();
   let args = messageArray.slice(1);
-
+  data_manager.save_file()
   run_command(bot, message, command, args, help);
 });
 
