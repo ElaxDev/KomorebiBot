@@ -1,5 +1,5 @@
 const Discord = module.require("discord.js");
-const data_manager = require("../scripts/data_manager.js")
+const data_manager = require("../scripts/managers/data_manager.js")
 let users_data = require("../resources/users_data.json");
 
 module.exports.run = async (bot, message, args, help) => {
