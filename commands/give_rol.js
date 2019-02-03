@@ -19,7 +19,8 @@ module.exports.run = async (bot, message, args, help) => {
     }
   }
 }
-module.exports.help = {
+module.exports.config = {
   name: "give_rol",
-  usage: ""
+  usage: "",
+  level: 3
 }

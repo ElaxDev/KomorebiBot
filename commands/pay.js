@@ -4,7 +4,7 @@ const data_manager = require('../scripts/managers/data_manager.js')
 let users_data = require("../resources/users_data.json");
 
 module.exports.run = async (bot, message, args, help) => {
-  let mention = message.mentions.members.first() || message.guild.members.get(args[1]); //Separado es mejor
+  let mention = message.mentions.members.first() || message.guild.members.get(args[1]);
 
   if (users_data[message.author.id].Coins == 0 || users_data[message.author.id] < args[0]) {
     return message.reply("¡No tienes monedas para pagar!");
@@ -25,7 +25,8 @@ module.exports.run = async (bot, message, args, help) => {
   message.channel.send(given);
 }
 
-module.exports.help = {
+module.exports.config = {
   name: "pay",
-  usage: "if.pay [Cantidad] @usuario"
+  usage: "if.pay [Cantidad] @usuario",
+  level: 3
 }

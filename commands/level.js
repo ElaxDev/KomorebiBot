@@ -22,7 +22,8 @@ module.exports.run = async (bot, message, args, help) => {
   message.channel.send(levelEmbed);
 }
 
-module.exports.help = {
+module.exports.config = {
   name: "level",
-  usage: ""
+  usage: "",
+  level: 3
 }

@@ -7,7 +7,9 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "webshot": "^0.18.0",
+    "jimp": "^0.6.0",
+    "jsdom": "^13.2.0",
+    "xmlhttprequest": "^1.8.0",
     "yt-search": "^0.4.1",
     "ytdl": "^0.11.1",
     "ytdl-core": "^0.29.1"

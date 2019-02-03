@@ -5,7 +5,8 @@ module.exports.run = async (bot, message, args, help) => {
   message.channel.send("**Pong!! >3< ~<3**");
 
 }
-module.exports.help = {
+module.exports.config = {
   name: "ping",
-  usage: ""
+  usage: "",
+  level: 3
 }

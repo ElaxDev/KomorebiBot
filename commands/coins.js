@@ -28,7 +28,8 @@ module.exports.run = async (bot, message, args, help) => {
   message.channel.send(coinEmbed)
 }
 
-module.exports.help = {
+module.exports.config = {
   name: "coins",
-  usage: "if.coins [Usuario del que quieres ver las monedas]"
+  usage: "if.coins [Usuario del que quieres ver las monedas]",
+  level: 3
 }

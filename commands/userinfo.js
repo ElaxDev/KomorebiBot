@@ -11,7 +11,8 @@ module.exports.run = async (bot, message, args, help) => {
 
    message.channel.send({embed: embed});
 }
-module.exports.help = {
+module.exports.config = {
   name: "userinfo",
-  usage: ""
+  usage: "",
+  level: 3
 }

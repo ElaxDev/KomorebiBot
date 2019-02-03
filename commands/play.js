@@ -6,7 +6,8 @@ module.exports.run = async (bot, message, args, help) => {
   // if(!voiceChannel) return message.reply('¡Debes estar en un canal de voz antes de usar este comando!');
   // if (message.guild.me.voiceChannel)
 }
-module.exports.help = {
+module.exports.config = {
   name: "avatar",
-  usage: ""
+  usage: "",
+  level: 3
 }

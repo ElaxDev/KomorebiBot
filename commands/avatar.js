@@ -27,7 +27,8 @@ module.exports.run = async (bot, message, args, help) => {
 
     msg.delete();
 }
-module.exports.help = {
+module.exports.config = {
   name: "avatar",
-  usage: ""
+  usage: "",
+  level: 3
 }

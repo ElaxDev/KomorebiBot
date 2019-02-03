@@ -33,7 +33,8 @@ let commands = [];
  message.channel.send(helpEmbed);
 }
 
-module.exports.help = {
+module.exports.config = {
   name: "help",
-  usage: ""
+  usage: "",
+  level: 3
 }
