@@ -10,9 +10,9 @@ module.exports.run = async (bot, message, args, help) => {
      .addField("Creado en", message.author.createdAt);
 
    message.channel.send({embed: embed});
-}
+};
 module.exports.config = {
   name: "userinfo",
   usage: "",
   level: 3
-}
+};

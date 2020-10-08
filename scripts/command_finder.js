@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 var commands = [];
 var helps = [];
 var levels = {};
@@ -14,12 +14,12 @@ fs.readdir("./commands/", (error, files) => {
       let props = require(`../commands/${file}`);
       console.log(`${i + 1}: ${file} cargado!`);
       commands.push([props.config.name, props]);
-      helps.push([props.config.name, props.config.usage])
-      levels[props.config.name] = props.config.level
+      helps.push([props.config.name, props.config.usage]);
+      levels[props.config.name] = props.config.level;
   });
 });
 module.exports.get_commands = {
   "commands" : commands,
   "helps" : helps,
   "levels" : levels
-}
+};

@@ -14,8 +14,8 @@ module.exports.run = async (bot, message, args, help) => {
   if (!user) return message.reply("¡Debes especificar a que usuario quieres darle las monedas!");
   if (args[0].isNaN === true) return message.reply("La cantidad debe ser un número!");
 
-  users_data[message.author.id].Coins -= parseInt(args[0])
-  users_data[mention.user.id].Coins += parseInt(args[0])
+  users_data[message.author.id].Coins -= parseInt(args[0]);
+  users_data[mention.user.id].Coins += parseInt(args[0]);
 
   let given = new Discord.RichEmbed()
   .setAuthor(message.author.username, message.author.displayAvatarURL)
@@ -23,10 +23,10 @@ module.exports.run = async (bot, message, args, help) => {
   .addField("Info:", `Se le han transferido ${args[0]} monedas a ${mention.user.username} correctamente.`);
 
   message.channel.send(given);
-}
+};
 
 module.exports.config = {
   name: "pay",
   usage: "if.pay [Cantidad] @usuario",
   level: 3
-}
+};

@@ -1,13 +1,12 @@
-const Discord = module.require("discord.js");
 
-module.exports.run = async (bot, message, args, help) => {
+module.exports.run = async (bot, message, args) => {
 
   let msg = await message.channel.send("Generando avatar...");
   if (args[0]) {
     const user = message.mentions.members.first().user;
     if (!user) {
       msg.delete();
-      return message.reply("Por favor, use una mención válida si quiere ver el avatar de alguien más.");
+      return message.reply("Please mention a valid user!");
     }
     await message.channel.send({files: [
       {
@@ -26,9 +25,10 @@ module.exports.run = async (bot, message, args, help) => {
   ]});
 
     msg.delete();
-}
+};
+
 module.exports.config = {
   name: "avatar",
   usage: "",
   level: 3
-}
+};

@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, help) => {
 
 
   if(!users_data[message.author.id]) {
-    data_manager.add_data(message.author.id,[1,0,5])
+    data_manager.add_data(message.author.id,[1,0,5]);
   }
   let currentxp = users_data[message.author.id].Xp;
   let currentlevel = users_data[message.author.id].Level;
@@ -20,10 +20,10 @@ module.exports.run = async (bot, message, args, help) => {
   .addField("XP: ", currentxp, true)
   .setFooter(`${difference} XP para el siguiente nivel.`, message.author.displayAvatarURL);
   message.channel.send(levelEmbed);
-}
+};
 
 module.exports.config = {
   name: "level",
   usage: "",
   level: 3
-}
+};
