@@ -11,25 +11,23 @@ const command_finder = require('./scripts/command_finder.js');
 
 var users_data = require("./resources/users_data.json");
 var commands = command_finder.get_commands.commands;
-var configs = {
-  "helps": command_finder.get_commands.helps,
-  "levels": command_finder.get_commands.levels
-};
+var commandInfo = command_finder.get_commands.infos;
 
-function run_command(bot, message, command, args, configs) {
+function run_command(bot, message, command, args, info) {
   if (!command.startsWith(prefix)) return;
-  for (i = 0; i < commands.length; i++) {
-    if (prefix + commands[i][0] === command) {
+  let commandName = command.replace(`${prefix}`, '');
+  for (i = 0; i < Object.keys(commands).length; i++) {
+    if (commands[commandName]) {
       let user = message.guild.member(message.author);
-      let level = configs.levels[configs.helps[i][0]];
+      let level = info[commandName].level;
       if (level != 3) {
         if (user.hasPermission("MANAGE_MESSAGES")) {
-          commands[i][1].run(bot, message, args, configs.helps);
+          commands[commandName].run(bot, message, args, info);
         } else {
-          return message.reply(`**No tienes permiso para esto!!**`);
+          return message.reply(`**You don't have permission for this!**`);
         }
       } else {
-        commands[i][1].run(bot, message, args, configs.helps);
+        commands[commandName].run(bot, message, args, info);
       }
       break;
     }
@@ -37,7 +35,7 @@ function run_command(bot, message, command, args, configs) {
 }
 
 bot.on('ready', async () => {
-  console.log(`bot is ready! ${bot.user.username}`);
+  console.log(`${bot.user.username} bot is ready!`);
 });
 
 bot.on("message", async message => {
@@ -52,7 +50,7 @@ bot.on("message", async message => {
   }
 
   message_manager.run(message);
-  run_command(bot, message, command, args, configs);
+  run_command(bot, message, command, args, commandInfo);
 });
 
 bot.login(token);
