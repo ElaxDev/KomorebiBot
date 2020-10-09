@@ -16,6 +16,8 @@ module.exports.run = async(bot, message, args, help) => {
 };
 module.exports.config = {
   name: "kick",
-  usage: "",
+  description: "Kicks a user off the server",
+  usage: "kick <user> [reason]",
+  category: "Moderation",
   level: 2
 };

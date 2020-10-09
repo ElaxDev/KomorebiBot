@@ -29,6 +29,8 @@ module.exports.run = async (bot, message, args, help) => {
 
 module.exports.config = {
   name: "give_role",
-  usage: `Gives a role to a user:\ngive_role <role name> [user]`,
+  description: "Gives a role to a user",
+  usage: "give_role <role name> [user]",
+  category: "Moderation",
   level: 3
 };

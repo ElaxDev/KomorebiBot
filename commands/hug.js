@@ -23,6 +23,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "hug",
-  usage: `Sends a hug to a user:\nhug [user]`,
+  description: "Sends a hug to a user",
+  usage: "hug [user]",
+  category: "Fun",
   level: 3
 };

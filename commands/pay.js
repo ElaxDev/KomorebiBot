@@ -1,6 +1,4 @@
 const Discord = module.require('discord.js');
-const fs = module.require("fs");
-const data_manager = require('../scripts/managers/data_manager.js')
 let users_data = require("../resources/users_data.json");
 
 module.exports.run = async (bot, message, args, help) => {
@@ -17,16 +15,18 @@ module.exports.run = async (bot, message, args, help) => {
   users_data[message.author.id].Coins -= parseInt(args[0]);
   users_data[mention.user.id].Coins += parseInt(args[0]);
 
-  let given = new Discord.RichEmbed()
+  let givenEmbed = new Discord.RichEmbed()
   .setAuthor(message.author.username, message.author.displayAvatarURL)
   .setColor('#ffff00')
-  .addField("Info:", `Se le han transferido ${args[0]} monedas a ${mention.user.username} correctamente.`);
+  .addField('Info:', `${args[0]} coins has been transferred to ${mention.user.username}'s account succesfully!`);
 
-  message.channel.send(given);
+  message.channel.send(givenEmbed);
 };
 
 module.exports.config = {
   name: "pay",
-  usage: "if.pay [Cantidad] @usuario",
+  description: "Transfer a quanity of coins to a user",
+  usage: "pay <quantity> <user>",
+  category: "Fun",
   level: 3
 };

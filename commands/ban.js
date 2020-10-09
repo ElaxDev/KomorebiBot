@@ -16,6 +16,8 @@ module.exports.run = async(bot, message, args, help) => {
 };
 module.exports.config = {
   name: "ban",
-  usage: "",
+  description: "Bans a user from the server",
+  usage: "ban <@user or username>",
+  category: "Moderation",
   level: 1
 };
