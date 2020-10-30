@@ -1,5 +1,5 @@
 
-module.exports.run = async (bot, message, args, help) => {
+module.exports.run = async (message, bot, args, help) => {
   let guild = message.guild;
   let member = message.member;
   let role_tag;
@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, help) => {
     member = message.mentions.members.first();
     role_tag = args.slice(1).join(" ");
   } else {
-    return message.reply('You need to specify at least an argument!');
+    return message.reply('You need to specify a member to give the role to!');
   }
 
   let role = await guild.roles.cache.find(role => role.name === role_tag);
@@ -18,19 +18,18 @@ module.exports.run = async (bot, message, args, help) => {
     return message.reply(`**There is no role named ${role_tag}!**`);    
   } else {
     if(memberRole !== undefined){
-      return message.reply(`**You already have the role ${role_tag}!**`);
+      return message.reply(`**The user already have the role ${role_tag}!**`);
     } else {
       member.roles.add(role).then(() => {
-        message.reply(`**Congrats!! You got the role ${role_tag}.**`);
+        message.reply(`**${role_tag} role assigned sucessfully!**`);
       }).catch(() => message.channel.send(`**I don't have the permissions to do that!**`));
     }
   }
 };
 
-module.exports.config = {
-  name: "give_role",
-  description: "Gives a role to a user",
-  usage: "give_role <role name> [user]",
-  category: "Moderation",
-  level: 3
+module.exports.info = {
+  name: 'giverole',
+  description: 'Gives a role to a user',
+  expectedArgs: '<User>',
+  permissions: ['MANAGE_ROLES']
 };

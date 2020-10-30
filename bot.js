@@ -1,56 +1,47 @@
-const Discord = require('discord.js');
-const { prefix, token } = require('./scripts/config.js').config;
-console.log(`prefix: ${prefix}\ntoken: ${token}`);
-const bot = new Discord.Client({
+const { Client, Collection } = require('discord.js');
+const { prefix, token } = require('./scripts/config.js');
+const mongo = require('./scripts/mongo');
+const bot = new Client({
   disableEveryone: true
 });
+bot.prefix = prefix;
 
-const data_manager = require('./scripts/managers/data_manager.js');
 const message_manager = require('./scripts/managers/message_manager.js');
-const command_finder = require('./scripts/command_finder.js');
+const command_handler = require('./scripts/command_handler.js');
 
-var users_data = require("./resources/users_data.json");
-var commands = command_finder.get_commands.commands;
-var commandInfo = command_finder.get_commands.infos;
+bot.commands = new Collection();
+command_handler.loadCommands(bot.commands);
 
-function run_command(bot, message, command, args, info) {
-  if (!command.startsWith(prefix)) return;
-  let commandName = command.replace(`${prefix}`, '');
-  for (i = 0; i < Object.keys(commands).length; i++) {
-    if (commands[commandName]) {
+function run_command(message, bot, commandName, args) {
+    if (bot.commands.has(commandName)) {
+      let command = bot.commands.get(commandName);
       let user = message.guild.member(message.author);
-      let level = info[commandName].level;
-      if (level != 3) {
-        if (user.hasPermission("MANAGE_MESSAGES")) {
-          commands[commandName].run(bot, message, args, info);
-        } else {
-          return message.reply(`**You don't have permission for this!**`);
-        }
-      } else {
-        commands[commandName].run(bot, message, args, info);
-      }
-      break;
-    }
+      command_handler.runCommand(command, user, message, bot, args);
   }
 }
 
 bot.on('ready', async () => {
+  bot.user.setActivity(`Type ${prefix}help for help!`);
+  await mongo().then(mongoose => {
+    try {
+      console.log('Database connected!');
+    } finally {
+      mongoose.connection.close();
+    }
+  });
   console.log(`${bot.user.username} bot is ready!`);
 });
 
 bot.on("message", async message => {
   if (message.author.bot) return;
   if (message.channel.type === "dm") return;
+  message_manager.run(message);
+  if (!message.content.startsWith(prefix)) return;
   let messageArray = message.content.split(" ");
-  let command = messageArray[0].toLowerCase();
+  let command = messageArray[0].toLowerCase().replace(`${prefix}`, '');
   let args = messageArray.slice(1);
 
-  if (!users_data[message.author.id]) {
-    data_manager.add_user(message.author.id);
-  }
-
-  message_manager.run(message);
-  run_command(bot, message, command, args, commandInfo);
+  run_command(message, bot, command, args);
 });
 
 bot.login(token);
