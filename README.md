@@ -104,7 +104,7 @@ Distributed under the MIT License.
 <!-- CONTACT -->
 ## Contact
 
-Discord - Elax#7777
+Discord - hitogi
 
 Project Link: [https://github.com/ElaxDev/KomorebiBot](https://github.com/ElaxDev/KomorebiBot)
 
